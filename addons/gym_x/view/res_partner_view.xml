@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Clinic Module
+#    Copyright (C) 2013 Grupo ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<!-- clinic.patient -->
+<!-- res.partner -->
+<!-- res.partner -->
+<openerp>
+    <data>
+
+        <record id="gym.action_gym_partner_trainees" model="ir.actions.act_window">
+            <field name="view_id" ref=""/>
+            <field name="search_view_id" ref=""/>
+        </record>          
+        <record id="gym.action_gym_partner_trainers" model="ir.actions.act_window">
+            <field name="view_id" ref=""/>
+            <field name="search_view_id" ref=""/>
+        </record> 
+
+        <record id="gym.view_gym_partner_filter" model="ir.ui.view">
+            <field name="priority" eval="99"/>
+        </record>
+
+        <record id="gym.view_gym_partner_tree" model="ir.ui.view">
+            <field name="priority" eval="99"/>
+        </record>
+
+        <!-- SEARCHVIEW -->
+        <record id="view_contact_filter" model="ir.ui.view">
+            <field name="name">contact.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+               <filter name="customer" position="before">               
+                    <filter name="is_trainee" domain="[('is_trainee','=',1)]" help="Trainee"/>   
+                    <filter name="is_trainer" domain="[('is_trainer','=',1)]" help="Trainer"/>    
+               </filter>                
+               <filter name="customer" position="replace"/>   
+<!--               <filter name="supplier" position="replace"/>                        -->
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_res_partner_gym_form" model="ir.ui.view">
+            <field name="name">contact.partner.gym.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"></field>
+            <field name="arch" type="xml">
+
+                <div class="oe_edit_only" position="attributes">
+                    <attribute name="groups">"base.group_no_one"</attribute>
+                </div>
+                <field name="parent_id" position="attributes">
+                    <attribute name="groups">"base.group_no_one"</attribute>
+                </field>
+
+                <page string="Sales &amp; Purchases" position="attributes">
+                    <attribute name="groups">base.group_no_one</attribute>
+                </page>
+
+                <xpath expr="//div[@name='buttons']" position="after">
+                    <div class="oe_right oe_button_box" name="partner_type">   
+                        
+                        <label for="is_trainee"/>
+                        <field name="is_trainee"/>   
+
+                        <label for="is_trainer"/>
+                        <field name="is_trainer"/>
+                    </div>
+                </xpath>          
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

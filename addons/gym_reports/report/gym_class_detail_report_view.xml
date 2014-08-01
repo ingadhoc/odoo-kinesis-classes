@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- SEARCH VIEW -->
+        <record id="view_gym_gym_class_detail_filter" model="ir.ui.view">
+            <field name="name">gym.gym_class_detail.select</field>
+            <field name="model">gym.class_detail_report</field>
+            <field name="arch" type="xml">
+                <search string="Class Detail" version="7.0">
+                    <group string="By object">
+                        <field name="class_code"/>
+                        <field name="week_day"/>
+                        <field name="schedule_id"/>
+                        <field name="activity_id"/>
+                        <field name="date_from" filter_domain="[('date','&gt;=',self)]"/>
+                        <separator/>
+                        <field name="date_to" filter_domain="[('date','&lt;=',self)]"/>
+                        <field name="trainer_id"/>
+                        <field name="trainee_id"/>
+                    </group>
+                    <group expand="1" string="Group By...">
+                        <filter string="Date" domain="[]" context="{'group_by':'date'}" />
+                        <filter string="Trainer" domain="[]" context="{'group_by':'trainer_id'}" />
+                        <filter string="Schedule" domain="[]" context="{'group_by':'schedule_id'}" />
+                        <filter string="Activity" domain="[]" context="{'group_by':'activity_id'}" />
+                        <filter string="Trainee" domain="[]" context="{'group_by':'trainee_id'}" />
+                        <filter string="Week Day" domain="[]" context="{'group_by':'week_day'}" />
+                        <filter string="Class Code" domain="[]" context="{'group_by':'class_code'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- GRAPH -->
+        
+        <record id="view_gym_gym_class_detail_graph" model="ir.ui.view">
+            <field name="name">gym.gym_class_detail.graph</field>
+            <field name="model">gym.class_detail_report</field>
+            <field name="arch" type="xml">
+                <graph string="Leads Analysis" type="pivot" stacked="True">
+                    <!-- <field name="value" operator="+"/> -->
+                    <field name="activity_id" type="row" />
+                    <!-- <field name="activity_id" group="True" /> -->
+                    <field name="date" interval="month" type="col"/>
+
+                    <!-- <field name="user_id" type="row"/> -->
+                    <!-- <field name="create_date" interval="week" type="col"/> -->
+                </graph>
+
+<!--                 <graph orientation="vertical" string="Class Details" type="line">
+                    <field name="date" />
+                    <field name="value" operator="+"/>
+                    <field name="activity_id" group="True" />
+                </graph> -->
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+
+        <record id="view_gym_gym_class_detail_tree" model="ir.ui.view">
+            <field name="name">gym.gym_class_detail.tree</field>
+            <field name="model">gym.class_detail_report</field>
+            <field name="priority" eval="90"/> 
+            <field name="arch" type="xml">
+                <tree string="Class Detail">
+                    <field name="date"/>
+                    <field name="week_day"/>
+                    <field name="trainer_id"/>
+                    <field name="schedule_id"/>
+                    <field name="activity_id"/>
+                    <field name="trainee_id"/>
+                    <field name="value" sum="# Total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_report_gym_class_detail_report" model="ir.actions.act_window">
+            <field name="name">Gym Class Detail</field>
+            <field name="res_model">gym.class_detail_report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,tree</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" ref="view_gym_gym_class_detail_graph"/>
+            <field name="search_view_id" ref="view_gym_gym_class_detail_filter"/>
+        </record>
+
+
+       <menuitem name="Gym" id="menu_report_gym"
+            groups="gym.group_user"
+            parent="base.menu_reporting" sequence="10"/>
+      
+      <menuitem  id="action_report_gym_class_detail_report_menu"
+            parent="menu_report_gym" action="action_report_gym_class_detail_report" sequence="10"/>        
+
+<!-- 
+
+ 
+
+
+        <record id="view_report_expresso_crm_filter" model="ir.ui.view">
+            <field name="name">expresso.crm.report.select</field>
+            <field name="model">expresso.crm.report</field>
+            <field name="arch" type="xml">
+                <search string="Campaign Details">
+                    <separator/>
+                    <group expand="0" string="Extended Filters...">
+                        <field name="company_id"  groups="base.group_multi_company" />
+                        <field name="partner_id" filter_domain="[('partner_id','child_of',self)]"/>
+                        <field name="course_id" />
+                        <field name="educational_plan_id" />
+                        <field name="campaign_id" />
+                        <filter string="Potential" domain="[('type','=', 'Potential')]"/>
+                        <filter string="Real" domain="[('type','=', 'Real')]"/>
+                    </group>
+                    <group expand="1" string="Group By...">
+                        <filter string="Campaign" domain="[]" context="{'group_by':'campaign_id'}" />
+                        <filter string="Educational Plan" domain="[]" context="{'group_by':'educational_plan_id'}" />
+                        <filter string="Company" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="School" domain="[]" context="{'group_by':'partner_id'}" />
+                        <filter string="Course" domain="[]" context="{'group_by':'course_id'}" />
+                        <filter string="Type" domain="[]" context="{'group_by':'type'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_report_expresso_crm_report" model="ir.actions.act_window">
+            <field name="name">Campaign Details</field>
+            <field name="res_model">expresso.crm.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" ref="view_report_expresso_crm_tree"/>
+            <field name="search_view_id" ref="view_report_expresso_crm_filter"/>
+            <field name="help">Have a general overview of all campaings made by sorting them with specific criteria such as the schools, courses per school and educational plans.</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_report_expresso_crm_report_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_report_expresso_crm_tree"/>
+            <field name="act_window_id" ref="action_report_expresso_crm_report"/>
+        </record>
+
+       <menuitem name="Expresso CRM" id="menu_report_expresso_crm"
+            groups="expresso_crm.group_user"
+            parent="base.menu_reporting" sequence="1"/>
+      
+      <menuitem name="Campaign Details" id="menu_report_expresso_crm_campaign_details_tree"
+            parent="menu_report_expresso_crm" action="action_report_expresso_crm_report" sequence="1"/>
+
+ -->    </data>
+</openerp>

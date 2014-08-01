@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Gym
+#    Copyright (C) 2014 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+-->
+<openerp>
+    <data>
+
+        <menuitem
+            name="Gym"
+            id="menu_gym"
+            sequence="20"
+            groups="group_user"
+            />
+
+
+        <menuitem
+            name="Configuration"
+            id="menu_configuration"
+            sequence="100"
+            parent="menu_gym"
+            groups="group_manager"
+            />
+
+
+        <menuitem
+            name="Data"
+            id="menu_data"
+            sequence="10"
+            parent="menu_gym"
+            groups="group_user"
+            />
+
+        <record id="action_gym_activity_activities" model="ir.actions.act_window">
+            <field name="name">Activities</field>
+            <field name="res_model">gym.activity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_gym_activity_tree"/>
+            <field name="search_view_id" ref="view_gym_activity_filter"/>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            name="Activities"
+            id="menu_activities"
+            sequence="30"
+            action="action_gym_activity_activities"
+            parent="menu_configuration"
+            groups="group_manager"
+            />
+
+        <record id="action_gym_gym_class_classes" model="ir.actions.act_window">
+            <field name="name">Classes</field>
+            <field name="res_model">gym.gym_class</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_gym_gym_class_tree"/>
+            <field name="search_view_id" ref="view_gym_gym_class_filter"/>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            name="Classes"
+            id="menu_classes"
+            sequence="10"
+            action="action_gym_gym_class_classes"
+            parent="menu_data"
+            groups="group_user"
+            />
+
+        <record id="action_gym_schedule_schedules" model="ir.actions.act_window">
+            <field name="name">Schedules</field>
+            <field name="res_model">gym.schedule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_gym_schedule_tree"/>
+            <field name="search_view_id" ref="view_gym_schedule_filter"/>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            name="Schedules"
+            id="menu_schedules"
+            sequence="40"
+            action="action_gym_schedule_schedules"
+            parent="menu_configuration"
+            groups="group_manager"
+            />
+
+        <record id="action_gym_partner_trainees" model="ir.actions.act_window">
+            <field name="name">Trainees</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_gym_partner_tree"/>
+            <field name="search_view_id" ref="view_gym_partner_filter"/>
+            <field name="context">{'default_is_trainee':1}</field>
+            <field name="domain">[('is_trainee','=',True)]</field>
+        </record>
+
+        <menuitem
+            name="Trainees"
+            id="menu_trainees"
+            sequence="10"
+            action="action_gym_partner_trainees"
+            parent="menu_configuration"
+            groups="group_manager"
+            />
+
+        <record id="action_gym_partner_trainers" model="ir.actions.act_window">
+            <field name="name">Trainers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_gym_partner_tree"/>
+            <field name="search_view_id" ref="view_gym_partner_filter"/>
+            <field name="context">{'default_is_trainer':1}</field>
+            <field name="domain">[('is_trainer','=',True)]</field>
+        </record>
+
+        <menuitem
+            name="Trainers"
+            id="menu_trainers"
+            sequence="20"
+            action="action_gym_partner_trainers"
+            parent="menu_configuration"
+            groups="group_manager"
+            />
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

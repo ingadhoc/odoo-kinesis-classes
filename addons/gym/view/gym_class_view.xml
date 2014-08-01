@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Gym
+#    Copyright (C) 2014 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<!-- gym.gym_class -->
+<!-- gym.gym_class -->
+<!-- gym.gym_class -->
+<openerp>
+    <data>
+
+        <!-- SEARCH VIEW -->
+        <record id="view_gym_gym_class_filter" model="ir.ui.view">
+            <field name="name">gym.gym_class.select</field>
+            <field name="model">gym.gym_class</field>
+            <field name="arch" type="xml">
+                <search string="Classes" version="7.0">
+                    <group string="By Attribute">
+                    <field name="date" string="Date"
+                            />
+                    </group>
+                    <group string="By object">
+                    <field name="trainer_id" string="Trainer"
+                            />
+                    <field name="schedule_id" string="Schedule"
+                            />
+                    <field name="activity_id" string="Activity"
+                            />
+                    <field name="gym_class_detail_ids" string="Class Detail"
+                            />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_gym_gym_class_form" model="ir.ui.view">
+            <field name="name">gym.gym_class.form</field>
+            <field name="model">gym.gym_class</field>
+            <field name="arch" type="xml">
+                <form string="Classes" version="7.0">
+                    <header>
+                    </header>
+                    <sheet string="Classes">
+                     <group>
+                        <field name="date"
+                            />
+                    <field name="trainer_id"
+                            />
+                    <field name="schedule_id"
+                            />
+                    <field name="activity_id"
+                            />
+                    <field name="gym_class_detail_ids"
+                            />
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+
+        <record id="view_gym_gym_class_tree" model="ir.ui.view">
+            <field name="name">gym.gym_class.tree</field>
+            <field name="model">gym.gym_class</field>
+            <field name="arch" type="xml">
+                <tree string="Classes"
+                    >
+                    <field name="date"
+                        />
+                    <field name="trainer_id"
+                        />
+                    <field name="schedule_id"
+                        />
+                    <field name="activity_id"
+                        />
+                    <field name="gym_class_detail_ids"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

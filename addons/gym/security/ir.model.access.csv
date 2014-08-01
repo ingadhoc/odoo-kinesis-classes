@@ -1,0 +1,11 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_res_partner_manager","res.partner.manager","model_res_partner","group_manager",1,1,1,1
+"access_res_partner_user","res.partner.user","model_res_partner","group_user",1,1,1,1
+"access_gym_gym_class_manager","gym.gym_class.manager","model_gym_gym_class","group_manager",1,1,1,1
+"access_gym_gym_class_user","gym.gym_class.user","model_gym_gym_class","group_user",1,1,1,1
+"access_gym_schedule_manager","gym.schedule.manager","model_gym_schedule","group_manager",1,1,1,1
+"access_gym_schedule_user","gym.schedule.user","model_gym_schedule","group_user",1,1,1,1
+"access_gym_activity_manager","gym.activity.manager","model_gym_activity","group_manager",1,1,1,1
+"access_gym_activity_user","gym.activity.user","model_gym_activity","group_user",1,1,1,1
+"access_gym_gym_class_detail_manager","gym.gym_class_detail.manager","model_gym_gym_class_detail","group_manager",1,1,1,1
+"access_gym_gym_class_detail_user","gym.gym_class_detail.user","model_gym_gym_class_detail","group_user",1,1,1,1
